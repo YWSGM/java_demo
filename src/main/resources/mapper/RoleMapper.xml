@@ -21,4 +21,11 @@
         FROM role
         WHERE id = #{id}
     </select>
+
+    <!--查询角色列表-->
+    <select id="getRoleList" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM role
+    </select>
 </mapper>

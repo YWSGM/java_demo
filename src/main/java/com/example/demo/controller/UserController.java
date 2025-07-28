@@ -18,7 +18,7 @@ public class UserController {
     /**
      * 获取所有用户
      */
-    @GetMapping
+    @PostMapping("/list")
     public Result<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return Result.success(users);
@@ -28,9 +28,13 @@ public class UserController {
      * 根据ID获取用户
      */
     @PostMapping("/getUserById")
-    public Result<User> getUserById(@RequestBody Integer id) {
-        System.out.println(id);
-        User user = userService.getUserById(id);
+    public Result<User> getUserById(@RequestBody User paramsUser) {
+        System.out.println(paramsUser.getId());
+        Integer userId = paramsUser.getId();
+        if (userId == null) {
+            return Result.validateFailed("参数不合法，请检查参数后重试");
+        }
+        User user = userService.getUserById(paramsUser.getId());
         if (user != null) {
             return Result.success(user);
         } else {
@@ -41,7 +45,7 @@ public class UserController {
     /**
      * 创建新用户
      */
-    @PostMapping
+    @PostMapping("/createUser")
     public Result<Integer> createUser(@RequestBody User user) {
         boolean success = userService.createUser(user);
         if (success) {
@@ -54,7 +58,7 @@ public class UserController {
     /**
      * 更新用户信息
      */
-    @PutMapping("/updateUser")
+    @PostMapping("/updateUser")
     public Result<Void> updateUser(@RequestBody User user) {
         Integer userId = user.getId();
         if (userId == null) {
@@ -71,7 +75,7 @@ public class UserController {
     /**
      * 删除用户
      */
-    @DeleteMapping("/deleteUser")
+    @PostMapping("/deleteUser")
     public Result<Void> deleteUser(@RequestBody Integer id) {
         if (id == null) {
             return Result.failed("用户删除失败");

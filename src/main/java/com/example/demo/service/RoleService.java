@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Role;
 
+import java.util.List;
+
 public interface RoleService {
     /**
      * 根据id获取角色
@@ -9,4 +11,10 @@ public interface RoleService {
      * @return 角色对象
      */
     Role getRoleById(Integer id);
+
+    /**
+     * 获取角色列表
+     * @return 角色列表
+     */
+    List<Role> getRoleList();
 }

@@ -4,6 +4,8 @@ import com.example.demo.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface RoleMapper {
     /**
@@ -12,4 +14,10 @@ public interface RoleMapper {
      * @return 角色对象
      */
     Role findByRoleId(@Param("id") Integer id);
+
+    /**
+     * 获取角色列表
+     * @return 角色列表
+     */
+    List<Role> getRoleList();
 }

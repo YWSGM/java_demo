@@ -16,7 +16,7 @@ INSERT INTO `user` (`username`, `password`, `email`) VALUES
 ON DUPLICATE KEY UPDATE `username`=`username`;
 
 -- 创建角色表
-CREATE TABLE IF NOT EXISTS `role` (
+CREATE TABLE IF NOT EXISTS `Demo`.`role` (
   `id` int NOT NULL AUTO_INCREMENT,
   `role_name` varchar(50) NOT NULL,
   `user_id` varchar(100) NOT NULL,
@@ -31,4 +31,6 @@ INSERT INTO `Demo`.`role` (`role_name`, `user_id`) VALUES
    ('运营', '1'),
    ('研发', '1')
     ON DUPLICATE KEY UPDATE `role_name`=`role_name`;
+
+DROP TABLE `Demo`.`role`;
 
