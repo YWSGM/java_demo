@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.ApiLogMapper">
+    <!-- 结果映射 -->
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.ApiLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="log_id" property="logId" jdbcType="VARCHAR"/>
+        <result column="request_url" property="requestUrl" jdbcType="VARCHAR"/>
+        <result column="request_method" property="requestMethod" jdbcType="VARCHAR"/>
+        <result column="request_params" property="requestParams" jdbcType="LONGVARCHAR"/>
+        <result column="response_data" property="responseData" jdbcType="LONGVARCHAR"/>
+        <result column="error_message" property="errorMessage" jdbcType="LONGVARCHAR"/>
+        <result column="status_code" property="statusCode" jdbcType="INTEGER"/>
+        <result column="execution_time" property="executionTime" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 公共列 -->
+    <sql id="Base_Column_List">
+        id, log_id, request_url, request_method, request_params, response_data, error_message,
+        status_code, execution_time, create_time
+    </sql>
+
+    <!-- 插入日志 -->
+    <insert id="insert" parameterType="com.example.demo.entity.ApiLog" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO api_logs (
+            log_id, request_url, request_method, request_params, response_data,
+            error_message, status_code, execution_time, create_time
+        ) VALUES (
+            #{logId}, #{requestUrl}, #{requestMethod}, #{requestParams}, #{responseData},
+            #{errorMessage}, #{statusCode}, #{executionTime}, #{createTime}
+        )
+    </insert>
+
+    <!-- 根据日志ID查询 -->
+    <select id="findByLogId" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM api_logs
+        WHERE log_id = #{logId}
+    </select>
+
+    <!-- 查询最近的日志 -->
+    <select id="findRecentLogs" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM api_logs
+        ORDER BY create_time DESC
+        LIMIT #{limit}
+    </select>
+</mapper>
+
