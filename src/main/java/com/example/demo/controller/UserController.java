@@ -91,11 +91,12 @@ public class UserController {
      * 删除用户
      */
     @PostMapping("/deleteUser")
-    public Result<Void> deleteUser(@RequestBody Integer id) {
-        if (id == null) {
+    public Result<Void> deleteUser(@RequestBody User user) {
+        Integer userId = user.getUserId();
+        if (userId == null) {
             return Result.validateFailed(ResultMessage.VALIDATE_FAILED);
         }
-        boolean success = userService.deleteUser(id);
+        boolean success = userService.deleteUser(userId);
         if (success) {
             return Result.success(null, ResultMessage.SUCCESS);
         } else {
