@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mapper.UserMapper">
     <!-- 结果映射 -->
     <resultMap id="BaseResultMap" type="com.example.demo.entity.User">
-        <id column="user_id" property="user_id" jdbcType="INTEGER"/>
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>

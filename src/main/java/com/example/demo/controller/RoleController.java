@@ -30,11 +30,11 @@ public class RoleController {
 
     @PostMapping("/getRoleById")
     public Result<Role> getRoleById(@RequestBody Role role) {
-        Integer id = role.getId();
+        Integer id = role.getRoleId();
         if (id == null) {
             return Result.validateFailed(ResultMessage.VALIDATE_FAILED);
         }
-        Role roleData = roleService.getRoleById(role.getId());
+        Role roleData = roleService.getRoleById(role.getRoleId());
         if (roleData != null) {
             return Result.success(roleData);
         } else {

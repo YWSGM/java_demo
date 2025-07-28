@@ -34,12 +34,12 @@ public class UserController {
      */
     @PostMapping("/getUserById")
     public Result<User> getUserById(@RequestBody User paramsUser) {
-        System.out.println(paramsUser.getId());
-        Integer userId = paramsUser.getId();
+        System.out.println(paramsUser.getUserId());
+        Integer userId = paramsUser.getUserId();
         if (userId == null) {
             return Result.validateFailed(ResultMessage.VALIDATE_FAILED);
         }
-        User user = userService.getUserById(paramsUser.getId());
+        User user = userService.getUserById(paramsUser.getUserId());
         if (user != null) {
             return Result.success(user);
         } else {
@@ -54,7 +54,7 @@ public class UserController {
     public Result<Integer> createUser(@RequestBody User user) {
         boolean success = userService.createUser(user);
         if (success) {
-            return Result.success(user.getId(), ResultMessage.SUCCESS);
+            return Result.success(user.getUserId(), ResultMessage.SUCCESS);
         } else {
             return Result.failed(ResultMessage.ERROR);
         }
@@ -65,7 +65,7 @@ public class UserController {
      */
     @PostMapping("/updateUser")
     public Result<Void> updateUser(@RequestBody User user) {
-        Integer userId = user.getId();
+        Integer userId = user.getUserId();
         if (userId == null) {
             return Result.validateFailed(ResultMessage.VALIDATE_FAILED);
         }
