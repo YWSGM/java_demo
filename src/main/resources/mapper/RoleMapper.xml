@@ -4,28 +4,29 @@
 <mapper namespace="com.example.demo.mapper.RoleMapper">
     <!-- 结果映射 -->
     <resultMap id="BaseResultMap" type="com.example.demo.entity.Role">
-        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="role_id" property="roleId" jdbcType="INTEGER"/>
         <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
-        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="role_desc" property="roleDesc" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
     </resultMap>
 
     <!-- 公共列 -->
     <sql id="Base_Column_List">
-        id, role_name, user_id
+        role_id, role_name, role_desc, status
     </sql>
 
     <!--根据ID查询角色-->
     <select id="findByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         SELECT
             <include refid="Base_Column_List"/>
-        FROM role
-        WHERE id = #{id}
+        FROM roles
+        WHERE role_id = #{id}
     </select>
 
     <!--查询角色列表-->
     <select id="getRoleList" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List"/>
-        FROM role
+        FROM roles
     </select>
 </mapper>
