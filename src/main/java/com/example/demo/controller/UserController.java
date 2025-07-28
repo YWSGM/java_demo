@@ -25,7 +25,7 @@ public class UserController {
     public Result<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         if (!users.isEmpty()) {
-            for (User user : users) {
+            users.forEach(user -> {
                 // 处理状态
                 StatusEnum status = StatusEnum.getByCode(user.getStatus());
                 if (status != null) {
@@ -33,7 +33,7 @@ public class UserController {
                 } else {
                     user.setStatus(null);
                 }
-            }
+            });
             return Result.success(users, ResultMessage.SUCCESS);
         }
         return Result.success(new ArrayList<>(), ResultMessage.SUCCESS);

@@ -24,7 +24,7 @@ public class RoleController {
     public Result<List<Role>> getRoleList() {
         List<Role> roleList = roleService.getRoleList();
         if (!roleList.isEmpty()) {
-            for (Role role : roleList) {
+            roleList.forEach(role -> {
                 // 处理状态
                 StatusEnum status = StatusEnum.getByCode(role.getStatus());
                 if (status != null) {
@@ -32,7 +32,7 @@ public class RoleController {
                 } else {
                     role.setStatus(null);
                 }
-            }
+            });
             return Result.success(roleList, ResultMessage.SUCCESS);
         }
         return Result.success(new ArrayList<>(), ResultMessage.SUCCESS);
