@@ -42,3 +42,15 @@ INSERT INTO `Demo`.`roles` (`role_name`, `role_desc`) VALUES
 
 DROP TABLE `Demo`.`roles`;
 
+CREATE TABLE Demo.`user_role` (
+ `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '关联ID',
+ `user_id` INT UNSIGNED NOT NULL COMMENT '用户ID',
+ `role_id` INT UNSIGNED NOT NULL COMMENT '角色ID',
+ `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `idx_user_role` (`user_id`,`role_id`),
+ KEY `idx_role_id` (`role_id`),
+ CONSTRAINT `fk_ur_user_id` FOREIGN KEY (`user_id`) REFERENCES Demo.`users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ CONSTRAINT `fk_ur_role_id` FOREIGN KEY (`role_id`) REFERENCES Demo.`roles` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户角色关联表';
+
