@@ -12,7 +12,7 @@
 
     <!-- 公共列 -->
     <sql id="Base_Column_List">
-        role_id, role_name, role_desc, status
+        role_id, role_name, role_desc, status, create_time, update_time
     </sql>
 
     <!--根据ID查询角色-->

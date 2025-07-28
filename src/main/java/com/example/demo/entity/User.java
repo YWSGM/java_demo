@@ -7,6 +7,10 @@ public class User implements Serializable {
     private String username;
     private String password;
     private String email;
+    private String createTime;
+    private String updateTime;
+    private Integer status;
+    private String StatusDesc;
 
     public Integer getUserId() {
         return userId;
@@ -38,6 +42,34 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getStatus() {
+        return this.status;
+    }
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getStatusDesc() {
+        return this.StatusDesc;
+    }
+    public void setStatusDesc(String StatusDesc) {
+        this.StatusDesc = StatusDesc;
     }
 
     @Override

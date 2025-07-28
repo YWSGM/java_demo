@@ -13,7 +13,7 @@
 
     <!-- 公共列 -->
     <sql id="Base_Column_List">
-        user_id, username, password, email, phone, status
+        user_id, username, password, email, phone, status, create_time, update_time
     </sql>
 
     <!-- 根据ID查询用户 -->

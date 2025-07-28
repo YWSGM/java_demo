@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.common.Result;
 import com.example.demo.common.ResultMessage;
+import com.example.demo.common.enums.StatusEnum;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,15 @@ public class UserController {
     public Result<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         if (!users.isEmpty()) {
+            for (User user : users) {
+                // 处理状态
+                StatusEnum status = StatusEnum.getByCode(user.getStatus());
+                if (status != null) {
+                    user.setStatusDesc(status.getDesc());
+                } else {
+                    user.setStatus(null);
+                }
+            }
             return Result.success(users, ResultMessage.SUCCESS);
         }
         return Result.success(new ArrayList<>(), ResultMessage.SUCCESS);

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.common.Result;
 import com.example.demo.common.ResultMessage;
+import com.example.demo.common.enums.StatusEnum;
 import com.example.demo.entity.Role;
 import com.example.demo.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,15 @@ public class RoleController {
     public Result<List<Role>> getRoleList() {
         List<Role> roleList = roleService.getRoleList();
         if (!roleList.isEmpty()) {
+            for (Role role : roleList) {
+                // 处理状态
+                StatusEnum status = StatusEnum.getByCode(role.getStatus());
+                if (status != null) {
+                    role.setStatusDesc(status.getDesc());
+                } else {
+                    role.setStatus(null);
+                }
+            }
             return Result.success(roleList, ResultMessage.SUCCESS);
         }
         return Result.success(new ArrayList<>(), ResultMessage.SUCCESS);
