@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.common.Result;
+import com.example.demo.common.ResultMessage;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,7 +23,10 @@ public class UserController {
     @PostMapping("/list")
     public Result<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
-        return Result.success(users);
+        if (!users.isEmpty()) {
+            return Result.success(users, ResultMessage.SUCCESS);
+        }
+        return Result.success(new ArrayList<>(), ResultMessage.SUCCESS);
     }
 
     /**
@@ -32,7 +37,7 @@ public class UserController {
         System.out.println(paramsUser.getId());
         Integer userId = paramsUser.getId();
         if (userId == null) {
-            return Result.validateFailed("参数不合法，请检查参数后重试");
+            return Result.validateFailed(ResultMessage.VALIDATE_FAILED);
         }
         User user = userService.getUserById(paramsUser.getId());
         if (user != null) {
@@ -49,9 +54,9 @@ public class UserController {
     public Result<Integer> createUser(@RequestBody User user) {
         boolean success = userService.createUser(user);
         if (success) {
-            return Result.success(user.getId(), "用户创建成功");
+            return Result.success(user.getId(), ResultMessage.SUCCESS);
         } else {
-            return Result.failed("用户创建失败");
+            return Result.failed(ResultMessage.ERROR);
         }
     }
 
@@ -62,13 +67,13 @@ public class UserController {
     public Result<Void> updateUser(@RequestBody User user) {
         Integer userId = user.getId();
         if (userId == null) {
-            return Result.failed("用户更新失败");
+            return Result.validateFailed(ResultMessage.VALIDATE_FAILED);
         }
         boolean success = userService.updateUser(user);
         if (success) {
-            return Result.success(null, "用户更新成功");
+            return Result.success(null, ResultMessage.SUCCESS);
         } else {
-            return Result.failed("用户更新失败");
+            return Result.failed(ResultMessage.ERROR);
         }
     }
 
@@ -78,13 +83,13 @@ public class UserController {
     @PostMapping("/deleteUser")
     public Result<Void> deleteUser(@RequestBody Integer id) {
         if (id == null) {
-            return Result.failed("用户删除失败");
+            return Result.validateFailed(ResultMessage.VALIDATE_FAILED);
         }
         boolean success = userService.deleteUser(id);
         if (success) {
-            return Result.success(null, "用户删除成功");
+            return Result.success(null, ResultMessage.SUCCESS);
         } else {
-            return Result.failed("用户删除失败");
+            return Result.failed(ResultMessage.ERROR);
         }
     }
 }

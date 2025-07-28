@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.common.Result;
+import com.example.demo.common.ResultMessage;
 import com.example.demo.entity.Role;
 import com.example.demo.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,17 @@ public class RoleController {
     public Result<List<Role>> getRoleList() {
         List<Role> roleList = roleService.getRoleList();
         if (!roleList.isEmpty()) {
-            return Result.success(roleList, "操作成功");
+            return Result.success(roleList, ResultMessage.SUCCESS);
         }
-        return Result.success(new ArrayList<>(), "操作成功");
+        return Result.success(new ArrayList<>(), ResultMessage.SUCCESS);
     }
 
     @PostMapping("/getRoleById")
     public Result<Role> getRoleById(@RequestBody Role role) {
+        Integer id = role.getId();
+        if (id == null) {
+            return Result.validateFailed(ResultMessage.VALIDATE_FAILED);
+        }
         Role roleData = roleService.getRoleById(role.getId());
         if (roleData != null) {
             return Result.success(roleData);
