@@ -24,15 +24,6 @@ public class RoleController {
     public Result<List<Role>> getRoleList() {
         List<Role> roleList = roleService.getRoleList();
         if (!roleList.isEmpty()) {
-            roleList.forEach(role -> {
-                // 处理状态
-                StatusEnum status = StatusEnum.getByCode(role.getStatus());
-                if (status != null) {
-                    role.setStatusDesc(status.getDesc());
-                } else {
-                    role.setStatus(null);
-                }
-            });
             return Result.success(roleList, ResultMessage.SUCCESS);
         }
         return Result.success(new ArrayList<>(), ResultMessage.SUCCESS);
@@ -53,8 +44,11 @@ public class RoleController {
     }
 
     @PostMapping("/createRole")
-    public Result<Boolean> createRole(@RequestBody Role role) {
-        Result<Boolean> result = roleService.createRole(role);
-        return result;
+    public Result<Role> createRole(@RequestBody Role role) {
+        Integer result = roleService.createRole(role);
+        if (result > 0) {
+            return Result.success(null, ResultMessage.SUCCESS);
+        }
+        return Result.failed(ResultMessage.ERROR);
     }
 }

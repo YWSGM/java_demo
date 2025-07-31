@@ -13,6 +13,8 @@ public interface UserService {
      */
     User getUserById(Integer id);
 
+    User findByUsername(String userName);
+
     /**
      * 查询所有用户
      * @return 用户列表

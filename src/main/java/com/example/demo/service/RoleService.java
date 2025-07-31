@@ -21,6 +21,12 @@ public interface RoleService {
 
     /**
      * 创建角色
+     * @param role 角色
+     * @return
      */
-    Result<Boolean> createRole(Role role);
+    Integer createRole(Role role);
+
+    Role findByRoleName(String roleName);
+
+    Role findByRoleName(Role role);
 }

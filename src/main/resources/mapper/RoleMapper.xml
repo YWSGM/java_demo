@@ -23,6 +23,14 @@
         WHERE role_id = #{id}
     </select>
 
+    <!--根据名称查询角色-->
+    <select id="findByRoleName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM roles
+        WHERE role_name = #{roleName}
+    </select>
+
     <!--查询角色列表-->
     <select id="getRoleList" resultMap="BaseResultMap">
         SELECT
@@ -31,8 +39,8 @@
     </select>
 
     <!--创建角色-->
-    <insert id="createRole"  parameterType="com.example.demo.entity.Role" useGeneratedKeys="true" keyProperty="id">
+    <insert id="createRole"  parameterType="com.example.demo.entity.Role" useGeneratedKeys="true" keyProperty="roleId">
         INSERT INTO roles (role_name, role_desc, status)
-        VALUES (#{role_name}, #{role_desc}, #{status})
+        VALUES (#{roleName}, #{roleDesc}, #{status})
     </insert>
 </mapper>

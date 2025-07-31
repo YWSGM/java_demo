@@ -27,6 +27,10 @@ public interface RoleMapper {
 
     /**
      * 创建角色
+     * @param role 角色
+     * @return 影响行数
      */
-    Result<Boolean> createRole(@RequestBody Role role);
+    Integer createRole(@RequestBody Role role);
+
+    Role findByRoleName(String roleName);
 }
