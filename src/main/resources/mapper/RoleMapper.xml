@@ -43,4 +43,9 @@
         INSERT INTO roles (role_name, role_desc, status)
         VALUES (#{roleName}, #{roleDesc}, #{status})
     </insert>
+
+    <!--删除角色-->
+    <delete id="deleteRole" parameterType="java.lang.Integer">
+        DELETE FROM roles WHERE role_id = #{id}
+    </delete>
 </mapper>

@@ -51,4 +51,17 @@ public class RoleController {
         }
         return Result.failed(ResultMessage.ERROR);
     }
+
+    @PostMapping("/deleteRole")
+    public Result<Role> deleteRole(@RequestBody Role role) {
+        Integer roleId = role.getRoleId();
+        if (roleId == null) {
+            return Result.validateFailed(ResultMessage.VALIDATE_FAILED);
+        }
+        Integer result = roleService.deleteRole(roleId);
+        if (result > 0) {
+            return Result.success();
+        }
+        return Result.failed(ResultMessage.ERROR);
+    }
 }

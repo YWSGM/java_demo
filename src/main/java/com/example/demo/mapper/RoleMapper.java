@@ -32,5 +32,17 @@ public interface RoleMapper {
      */
     Integer createRole(@RequestBody Role role);
 
+    /**
+     * 根据名称查询角色
+     * @param roleName 角色名称
+     * @return 角色
+     */
     Role findByRoleName(String roleName);
+
+    /**
+     * 根据id删除角色
+     * @param id 角色id
+     * @return 影响列
+     */
+    Integer deleteRole(@RequestBody Integer id);
 }

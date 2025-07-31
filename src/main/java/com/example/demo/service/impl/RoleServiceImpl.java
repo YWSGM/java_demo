@@ -54,7 +54,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role findByRoleName(Role role) {
-        return null;
+    public Integer deleteRole(Integer id) {
+        return roleMapper.deleteRole(id);
     }
 }

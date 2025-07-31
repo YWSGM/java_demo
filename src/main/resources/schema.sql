@@ -1,5 +1,5 @@
 -- 创建用户表
-CREATE TABLE java_demo.`users` (
+CREATE TABLE IF NOT EXISTS java_demo.`users` (
     `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '用户ID',
     `username` VARCHAR(50) NOT NULL COMMENT '用户名',
     `password` VARCHAR(255) NOT NULL COMMENT '密码(加密存储)',
@@ -21,7 +21,7 @@ INSERT INTO java_demo.`users` (`username`, `password`, `email`) VALUES
 ON DUPLICATE KEY UPDATE `username`=`username`;
 
 -- 创建角色表
-CREATE TABLE java_demo.`roles` (
+CREATE TABLE IF NOT EXISTS java_demo.`roles` (
     `role_id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '角色ID',
     `role_name` VARCHAR(50) NOT NULL COMMENT '角色名称',
     `role_desc` VARCHAR(200) DEFAULT NULL COMMENT '角色描述',
@@ -42,7 +42,7 @@ INSERT INTO java_demo.`roles` (`role_name`, `role_desc`) VALUES
 
 DROP TABLE java_demo.`roles`;
 
-CREATE TABLE java_demo.`user_role` (
+CREATE TABLE IF NOT EXISTS java_demo.`user_role` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '关联ID',
     `user_id` INT UNSIGNED NOT NULL COMMENT '用户ID',
     `role_id` INT UNSIGNED NOT NULL COMMENT '角色ID',
@@ -86,3 +86,6 @@ CREATE TABLE IF NOT EXISTS api_logs (
     INDEX idx_log_id (log_id),
     INDEX idx_create_time (create_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='API请求日志表';
+
+ALTER TABLE java_demo.roles
+ADD COLUMN is_delete INT COMMENT '是否删除';
