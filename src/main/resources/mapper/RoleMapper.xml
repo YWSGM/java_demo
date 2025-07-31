@@ -29,4 +29,10 @@
             <include refid="Base_Column_List"/>
         FROM roles
     </select>
+
+    <!--创建角色-->
+    <insert id="createRole"  parameterType="com.example.demo.entity.Role" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO roles (role_name, role_desc, status)
+        VALUES (#{role_name}, #{role_desc}, #{status})
+    </insert>
 </mapper>

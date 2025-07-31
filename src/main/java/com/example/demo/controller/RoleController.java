@@ -51,4 +51,10 @@ public class RoleController {
             return Result.notFound();
         }
     }
+
+    @PostMapping("/createRole")
+    public Result<Boolean> createRole(@RequestBody Role role) {
+        Result<Boolean> result = roleService.createRole(role);
+        return result;
+    }
 }

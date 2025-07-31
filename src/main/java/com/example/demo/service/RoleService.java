@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.common.Result;
 import com.example.demo.entity.Role;
 
 import java.util.List;
@@ -17,4 +18,9 @@ public interface RoleService {
      * @return 角色列表
      */
     List<Role> getRoleList();
+
+    /**
+     * 创建角色
+     */
+    Result<Boolean> createRole(Role role);
 }

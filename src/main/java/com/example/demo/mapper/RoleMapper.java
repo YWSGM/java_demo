@@ -1,9 +1,11 @@
 package com.example.demo.mapper;
 
+import com.example.demo.common.Result;
 import com.example.demo.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -22,4 +24,9 @@ public interface RoleMapper {
      * @return 角色列表
      */
     List<Role> getRoleList();
+
+    /**
+     * 创建角色
+     */
+    Result<Boolean> createRole(@RequestBody Role role);
 }

@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.common.Result;
 import com.example.demo.entity.Role;
 import com.example.demo.mapper.RoleMapper;
 import com.example.demo.service.RoleService;
@@ -21,5 +22,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> getRoleList() {
         return roleMapper.getRoleList();
+    }
+
+    @Override
+    public Result<Boolean> createRole(Role role) {
+        return roleMapper.createRole(role);
     }
 }
