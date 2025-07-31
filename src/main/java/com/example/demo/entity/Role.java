@@ -1,9 +1,6 @@
 package com.example.demo.entity;
 
-import com.example.demo.common.enums.StatusEnum;
-
 import java.io.Serializable;
-import java.util.Date;
 
 public class Role implements Serializable {
     private int roleId;
