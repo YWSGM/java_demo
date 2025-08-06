@@ -5,6 +5,7 @@ import com.example.demo.common.ResultMessage;
 import com.example.demo.common.enums.StatusEnum;
 import com.example.demo.entity.Role;
 import com.example.demo.service.RoleService;
+import org.apache.tomcat.util.json.JSONFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,5 +64,10 @@ public class RoleController {
             return Result.success();
         }
         return Result.failed(ResultMessage.ERROR);
+    }
+
+    @PostMapping("/updateRole")
+    public Result<Role> updateRole(@RequestBody Role role) {
+        return roleService.updateRole(role);
     }
 }

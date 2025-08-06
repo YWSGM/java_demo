@@ -45,4 +45,6 @@ public interface RoleMapper {
      * @return 影响列
      */
     Integer deleteRole(@RequestBody Integer id);
+
+    Integer updateRole(Role role);
 }

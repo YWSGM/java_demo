@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.common.Result;
+import com.example.demo.common.ResultMessage;
 import com.example.demo.common.enums.StatusEnum;
 import com.example.demo.entity.Role;
 import com.example.demo.mapper.RoleMapper;
@@ -56,5 +57,28 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Integer deleteRole(Integer id) {
         return roleMapper.deleteRole(id);
+    }
+
+    @Override
+    public Result<Role> updateRole(Role role) {
+        Integer roleId = role.getRoleId();
+
+        String roleName = role.getRoleName();
+
+        if (roleId == null) {
+            return Result.failed("角色ID不能为空");
+        }
+
+        // 排除本身
+        Role roleWithSameName = findByRoleName(roleName);
+        if (roleWithSameName != null && !roleWithSameName.getRoleId().equals(roleId)) {
+            return Result.failed("角色名已存在");
+        }
+
+        Integer result = roleMapper.updateRole(role);
+        if (result > 0) {
+            return Result.success();
+        }
+        return Result.failed();
     }
 }

@@ -48,4 +48,15 @@
     <delete id="deleteRole" parameterType="java.lang.Integer">
         DELETE FROM roles WHERE role_id = #{id}
     </delete>
+
+    <!--更新角色-->
+    <update id="updateRole" parameterType="com.example.demo.entity.Role">
+        UPDATE roles
+        <set>
+            <if test="roleName != null">role_name = #{roleName},</if>
+            <if test="roleDesc != null">role_desc = #{roleDesc},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        WHERE role_id = #{roleId}
+    </update>
 </mapper>

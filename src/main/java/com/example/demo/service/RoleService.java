@@ -26,7 +26,19 @@ public interface RoleService {
      */
     Integer createRole(Role role);
 
+    /**
+     * 根据名称查询角色
+     * @param roleName 角色名称
+     * @return 角色
+     */
     Role findByRoleName(String roleName);
 
+    /**
+     * 删除角色
+     * @param id 角色id
+     * @return
+     */
     Integer deleteRole(Integer id);
+
+    Result<Role> updateRole(Role role);
 }
